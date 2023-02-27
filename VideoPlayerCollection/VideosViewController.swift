@@ -8,6 +8,7 @@
 import UIKit
 import Kingfisher
 import ProgressHUD
+import AVKit
 
 class VideosViewController: UIViewController {
     
@@ -81,7 +82,9 @@ extension VideosViewController: VideoManagerDelegate {
         
         DispatchQueue.main.async {
             self.videosCollection.reloadData()
+            ProgressHUD.show("Buscando...", icon: .privacy)
             ProgressHUD.remove()
+            
         }
     }
     
@@ -110,6 +113,20 @@ extension VideosViewController : UICollectionViewDelegate, UICollectionViewDataS
         
         return celda
     }
-    
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let defaultVideo = "https://player.vimeo.com/external/342571552.hd.mp4?s=6aa6f164de3812abadff3dde86d19f7a074a8a66&profile_id=175&oauth2_token_id=57447761"
+        guard let url = URL(string: "\(videos[indexPath.row].videoFiles.first?.link ?? defaultVideo)") else { return }
+        
+        let avPlayer = AVPlayer(url: url)
+        let avController = AVPlayerViewController()
+        avController.player = avPlayer
+        present(avController, animated: true) {
+            avPlayer.play()
+        }
+    }
     
 }
+
+

@@ -18,7 +18,7 @@ struct VideoManager {
     
     func findVideos(topic: String) async {
         do {
-            guard let url = URL(string: "https://api.pexels.com/videos/search?query=\(topic)&per_page=10&orientation=portrait") else {
+            guard let url = URL(string: "https://api.pexels.com/videos/search?query=\(topic)&locale=es-ES&per_page=80&orientation=portrait") else {
                 fatalError("Missing url")
             }
             
