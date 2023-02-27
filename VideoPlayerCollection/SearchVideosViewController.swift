@@ -7,13 +7,13 @@
 
 import UIKit
 
-protocol LoadFoundedVideosDelegate{
-    func loadFoundedVideos(listOfVideos: [Video])
-}
+
 
 class SearchVideosViewController: UIViewController {
     
-    var delegate: LoadFoundedVideosDelegate?
+    
+    
+    
     
     var activityView: UIActivityIndicatorView?
     
@@ -26,6 +26,7 @@ class SearchVideosViewController: UIViewController {
         super.viewDidLoad()
 
         manager.delegate = self
+        categoryName.delegate = self
         
     }
     
@@ -68,7 +69,9 @@ extension SearchVideosViewController: VideoManagerDelegate {
         DispatchQueue.main.async {
             self.dismiss(animated: true) {
                 print(listOfVideos)
-                self.delegate?.loadFoundedVideos(listOfVideos: listOfVideos)
+                ///Enviar la lista de videos al VideosViewController
+                NotificationCenter.default.post(name: VideosViewController.myNotification, object: listOfVideos)
+                print("Send listOfVideos")
                 self.hideActivityIndicator()
             }
         }

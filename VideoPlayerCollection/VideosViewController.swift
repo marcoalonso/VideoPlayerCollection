@@ -17,13 +17,9 @@ class VideosViewController: UIViewController {
     @IBOutlet weak var categoryVideosSegmentedControl: UISegmentedControl!
     
     var videos: [Video] = []
-    var categoriesName: [String] = [
-    "sports","ocen","people","animals","nature"
-    ]
 
     var manager = VideoManager()
     
-    var searcherManager = SearchVideosViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,25 +28,11 @@ class VideosViewController: UIViewController {
         videosCollection.delegate = self
         
         manager.delegate = self
-        searcherManager.delegate = self
-        
-        
+       
         
         setupCollection()
-        setupSegmentedControl()
-
-        getVideos(category: "\(categoryVideosSegmentedControl.titleForSegment(at: 0)!)")
-    }
-    
-    
-    
-    private func setupSegmentedControl(){
-        for (index, element) in categoriesName.enumerated() {
-          print("Item \(index): \(element)")
-            categoryVideosSegmentedControl.setTitle(element, forSegmentAt: index)
-        }
         
-        categoryVideosSegmentedControl.setTitle("soccer", forSegmentAt: 0)
+        getVideos(category: "\(categoryVideosSegmentedControl.titleForSegment(at: 0)!)")
     }
     
     private func setupCollection(){
@@ -88,9 +70,7 @@ class VideosViewController: UIViewController {
         
         switch sender.selectedSegmentIndex {
         case 0:
-            category = categoriesName[sender.selectedSegmentIndex]
-            print("Debug: category\(category)")
-//            category = "\(sender.titleForSegment(at: 0)!)"
+            category = "\(sender.titleForSegment(at: 0)!)"
         case 1:
             category = "\(sender.titleForSegment(at: 1)!)"
         case 2:
@@ -112,20 +92,8 @@ class VideosViewController: UIViewController {
 
 }
 
-//MARK: sendVideosDelegate
-extension VideosViewController: LoadFoundedVideosDelegate {
-    func loadFoundedVideos(listOfVideos: [Video]) {
-        
-        self.videos = listOfVideos
-        DispatchQueue.main.async {
-            self.videosCollection.reloadData()
-        }
-    }
-    
-    
-}
 
-//MARK: VideoManagerDelegate
+//MARK: Protocol VideoManagerDelegate
 extension VideosViewController: VideoManagerDelegate {
     func showVideos(listOfVideos: [Video]) {
         self.videos = listOfVideos
