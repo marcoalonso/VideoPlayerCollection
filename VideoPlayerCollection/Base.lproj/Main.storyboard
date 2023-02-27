@@ -20,17 +20,35 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="T2P-qz-NEP">
                                 <rect key="frame" x="20" y="59" width="353" height="759"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Video Player" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k4V-M4-r1L">
-                                        <rect key="frame" x="0.0" y="0.0" width="353" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="Rgj-Of-q6X"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="34P-Mu-kOR">
+                                        <rect key="frame" x="0.0" y="0.0" width="353" height="50"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Video Player" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k4V-M4-r1L">
+                                                <rect key="frame" x="0.0" y="0.0" width="298" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="Rgj-Of-q6X"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XNA-5e-EWx">
+                                                <rect key="frame" x="303" y="0.0" width="50" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="50" id="5ov-Z0-v8p"/>
+                                                </constraints>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title=" ">
+                                                    <backgroundConfiguration key="background" image="magnifyingglass" catalog="system"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="searchVideos:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5MV-92-z1x"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="TG2-3t-zub">
-                                        <rect key="frame" x="0.0" y="60" width="353" height="41"/>
+                                        <rect key="frame" x="0.0" y="80" width="353" height="41"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="AgR-qI-yFW"/>
                                         </constraints>
@@ -46,7 +64,7 @@
                                         </connections>
                                     </segmentedControl>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="QcX-vB-5rH">
-                                        <rect key="frame" x="0.0" y="130" width="353" height="629"/>
+                                        <rect key="frame" x="0.0" y="150" width="353" height="609"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="TnM-gb-nDW">
                                             <size key="itemSize" width="157" height="178"/>
@@ -112,8 +130,79 @@
             </objects>
             <point key="canvasLocation" x="962.59541984732823" y="3.5211267605633805"/>
         </scene>
+        <!--Search Videos View Controller-->
+        <scene sceneID="69f-ps-PyW">
+            <objects>
+                <viewController storyboardIdentifier="SearchVideosViewController" id="etX-Ht-kBI" customClass="SearchVideosViewController" customModule="VideoPlayerCollection" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1ec-9O-pti">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="425"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="paa-ea-8w7">
+                                <rect key="frame" x="30" y="59" width="333" height="336"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Buscar videos" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vnp-i0-NTa">
+                                        <rect key="frame" x="0.0" y="0.0" width="333" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="geO-yh-RJb"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Escribe algo de tu interés" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VzD-X1-yeh">
+                                        <rect key="frame" x="0.0" y="55" width="333" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="DGo-bh-IYF"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                                    </textField>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="next" translatesAutoresizingMaskIntoConstraints="NO" id="VQp-0c-Zcw">
+                                        <rect key="frame" x="0.0" y="100" width="333" height="181"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sTO-vT-hc2">
+                                        <rect key="frame" x="0.0" y="286" width="333" height="50"/>
+                                        <color key="backgroundColor" red="0.2117646933" green="0.2352941036" blue="0.4352940917" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="f1r-uT-jUe"/>
+                                        </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="BUSCAR"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <integer key="value" value="25"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="searchButton:" destination="etX-Ht-kBI" eventType="touchUpInside" id="eBP-cB-Guh"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="W1z-hG-U3P"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="paa-ea-8w7" firstAttribute="top" secondItem="W1z-hG-U3P" secondAttribute="top" id="IZh-pG-cmv"/>
+                            <constraint firstItem="W1z-hG-U3P" firstAttribute="trailing" secondItem="paa-ea-8w7" secondAttribute="trailing" constant="30" id="LTD-rG-2rc"/>
+                            <constraint firstItem="paa-ea-8w7" firstAttribute="leading" secondItem="W1z-hG-U3P" secondAttribute="leading" constant="30" id="bUt-eM-hUP"/>
+                            <constraint firstItem="W1z-hG-U3P" firstAttribute="bottom" secondItem="paa-ea-8w7" secondAttribute="bottom" constant="30" id="yC6-ID-Ywr"/>
+                        </constraints>
+                    </view>
+                    <size key="freeformSize" width="393" height="425"/>
+                    <connections>
+                        <outlet property="categoryName" destination="VzD-X1-yeh" id="ZxH-Qu-tON"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QLC-9p-wwW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1636" y="155"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="magnifyingglass" catalog="system" width="128" height="117"/>
         <image name="next" width="346" height="347"/>
         <image name="play.circle" catalog="system" width="128" height="123"/>
         <systemColor name="systemBackgroundColor">

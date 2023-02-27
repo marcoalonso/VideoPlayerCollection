@@ -37,8 +37,6 @@ struct VideoManager {
             let listOfVideos = decodedData.videos
             delegate?.showVideos(listOfVideos: listOfVideos)
             
-            
-            
         } catch {
             print("Debug: error \(error.localizedDescription)")
         }
