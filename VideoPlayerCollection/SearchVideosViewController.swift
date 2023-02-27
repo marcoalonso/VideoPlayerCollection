@@ -30,8 +30,8 @@ class SearchVideosViewController: UIViewController {
     //MARK: Functions
     private func search(){
         ProgressHUD.show("Buscando...", icon: .privacy)
-        guard let category = categoryName.text else { return }
-        
+        guard let category = categoryName.text?.replacingOccurrences(of: " ", with: "") else { return }
+        print("Debug: category \(category)")
         Task {
             await manager.findVideos(topic: category)
         }
