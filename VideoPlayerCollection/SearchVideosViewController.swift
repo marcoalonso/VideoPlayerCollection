@@ -49,6 +49,12 @@ class SearchVideosViewController: UIViewController {
 }
 
 extension SearchVideosViewController: VideoManagerDelegate {
+    func showError(error: String) {
+        DispatchQueue.main.async {
+            self.mostrarAlerta(titulo: "Error", mensaje: error)
+        }
+    }
+    
     func showVideos(listOfVideos: [Video]) {
         
         DispatchQueue.main.async {
@@ -57,7 +63,7 @@ extension SearchVideosViewController: VideoManagerDelegate {
             if let vc = self.presentingViewController as? VideosViewController {
                 self.dismiss(animated: true) {
                     vc.videos = listOfVideos
-                    vc.nameVideosLabel.text = "Videos de: \(self.categoryToSearch)"
+                    vc.nameVideosLabel.text = "Videos de \(self.categoryToSearch)"
                     DispatchQueue.main.async {
                         vc.videosCollection.reloadData()
                     }
@@ -66,6 +72,15 @@ extension SearchVideosViewController: VideoManagerDelegate {
         }
         
         
+    }
+    
+    func mostrarAlerta(titulo: String, mensaje: String) {
+        let alerta = UIAlertController(title: titulo, message: mensaje, preferredStyle: .alert)
+        let accionAceptar = UIAlertAction(title: "OK", style: .default) { _ in
+            //Do something
+        }
+        alerta.addAction(accionAceptar)
+        present(alerta, animated: true)
     }
     
     

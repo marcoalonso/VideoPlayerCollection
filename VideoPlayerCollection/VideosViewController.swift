@@ -99,6 +99,12 @@ class VideosViewController: UIViewController {
 
 //MARK: Protocol VideoManagerDelegate
 extension VideosViewController: VideoManagerDelegate {
+    func showError(error: String) {
+        self.mostrarAlerta(titulo: "Error", mensaje: error)
+    }
+    
+    
+    
     func showVideos(listOfVideos: [Video]) {
         self.videos = listOfVideos
         
@@ -108,6 +114,15 @@ extension VideosViewController: VideoManagerDelegate {
             ProgressHUD.remove()
             
         }
+    }
+    
+    func mostrarAlerta(titulo: String, mensaje: String) {
+        let alerta = UIAlertController(title: titulo, message: mensaje, preferredStyle: .alert)
+        let accionAceptar = UIAlertAction(title: "OK", style: .default) { _ in
+            //Do something
+        }
+        alerta.addAction(accionAceptar)
+        present(alerta, animated: true)
     }
     
     

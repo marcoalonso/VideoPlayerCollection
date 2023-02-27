@@ -9,6 +9,7 @@ import Foundation
 
 protocol VideoManagerDelegate{
     func showVideos(listOfVideos: [Video])
+    func showError(error: String)
 }
 
 
@@ -19,8 +20,12 @@ struct VideoManager {
     func findVideos(topic: String) async {
         do {
             guard let url = URL(string: "https://api.pexels.com/videos/search?query=\(topic)&locale=es-ES&per_page=80&orientation=portrait") else {
-                fatalError("Missing url")
+                print("Error al buscar videos")
+                delegate?.showError(error: "Error al buscar videos relacionados con tu búsqueda, favor de intentar con otra palabra o categoría.")
+                return
             }
+            
+            print("Debug: url\(url)")
             
             var urlRequest = URLRequest(url: url)
             urlRequest.setValue("BPuUOkpCZlGHv4bo9kU1mepVkcFUFcnG4LxF1bI4dk6iTSkWbR6wcjzU", forHTTPHeaderField: "Authorization")
