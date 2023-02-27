@@ -3,19 +3,16 @@
 //  VideoPlayerCollection
 //
 //  Created by Marco Alonso Rodriguez on 26/02/23.
-//
+/// Documentation Guide: https://betterprogramming.pub/5-ways-to-pass-data-between-view-controllers-18acb467f5ec
 
 import UIKit
-
-
+import ProgressHUD
 
 class SearchVideosViewController: UIViewController {
     
     
-    
-    
-    
     var activityView: UIActivityIndicatorView?
+    var categoryToSearch: String = ""
     
     @IBOutlet weak var categoryName: UITextField!
     
@@ -32,7 +29,7 @@ class SearchVideosViewController: UIViewController {
     
     //MARK: Functions
     private func search(){
-        showActivityIndicator()
+        ProgressHUD.show("Buscando...", icon: .privacy)
         guard let category = categoryName.text else { return }
         
         Task {
@@ -41,18 +38,6 @@ class SearchVideosViewController: UIViewController {
     }
     
     
-    func showActivityIndicator() {
-        activityView = UIActivityIndicatorView(style: .large)
-        activityView?.center = self.view.center
-        self.view.addSubview(activityView!)
-        activityView?.startAnimating()
-    }
-    
-    func hideActivityIndicator(){
-        if (activityView != nil){
-            activityView?.stopAnimating()
-        }
-    }
     
     @IBAction func searchButton(_ sender: UIButton) {
         search()
@@ -65,16 +50,22 @@ class SearchVideosViewController: UIViewController {
 
 extension SearchVideosViewController: VideoManagerDelegate {
     func showVideos(listOfVideos: [Video]) {
-        let listOfVideos = listOfVideos
+        
         DispatchQueue.main.async {
-            self.dismiss(animated: true) {
-                print(listOfVideos)
-                ///Enviar la lista de videos al VideosViewController
-                NotificationCenter.default.post(name: VideosViewController.myNotification, object: listOfVideos)
-                print("Send listOfVideos")
-                self.hideActivityIndicator()
+            ProgressHUD.remove()
+            
+            if let vc = self.presentingViewController as? VideosViewController {
+                self.dismiss(animated: true) {
+                    vc.videos = listOfVideos
+                    vc.nameVideosLabel.text = "Videos de: \(self.categoryToSearch)"
+                    DispatchQueue.main.async {
+                        vc.videosCollection.reloadData()
+                    }
+                }
             }
         }
+        
+        
     }
     
     
@@ -102,10 +93,12 @@ extension SearchVideosViewController: UITextFieldDelegate {
     //3.- Evitar que el usuario no escriba nada
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         if textField.text != "" {
+            categoryToSearch = textField.text!
             return true
         } else {
             //el usuario no escribio nada
             textField.placeholder = "Escribe una categoria..."
+            categoryToSearch = ""
             return false
         }
     }

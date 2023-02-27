@@ -13,6 +13,7 @@ import AVKit
 class VideosViewController: UIViewController {
     
     
+    @IBOutlet weak var nameVideosLabel: UILabel!
     @IBOutlet weak var videosCollection: UICollectionView!
     @IBOutlet weak var categoryVideosSegmentedControl: UISegmentedControl!
     
@@ -28,11 +29,14 @@ class VideosViewController: UIViewController {
         videosCollection.delegate = self
         
         manager.delegate = self
-       
         
         setupCollection()
         
         getVideos(category: "\(categoryVideosSegmentedControl.titleForSegment(at: 0)!)")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.videosCollection.reloadData()
     }
     
     private func setupCollection(){
@@ -53,7 +57,6 @@ class VideosViewController: UIViewController {
     @IBAction func searchVideos(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "SearchVideosViewController") as! SearchVideosViewController
-        
         if let sheet = vc.presentationController as? UISheetPresentationController {
             sheet.detents = [.medium(), .large()]
             sheet.prefersGrabberVisible = true ///Indicador horizontal de enmedio
@@ -66,6 +69,7 @@ class VideosViewController: UIViewController {
     @IBAction func categorySelectedAction(_ sender: UISegmentedControl) {
         ProgressHUD.show("Buscando...", icon: .privacy)
         
+        nameVideosLabel.text = "Categories"
         var category = "nature"
         
         switch sender.selectedSegmentIndex {
@@ -100,7 +104,7 @@ extension VideosViewController: VideoManagerDelegate {
         
         DispatchQueue.main.async {
             self.videosCollection.reloadData()
-            ProgressHUD.show("Buscando...", icon: .privacy)
+            
             ProgressHUD.remove()
             
         }
